@@ -1,23 +1,78 @@
 #include "..\StaticLib\matrix.h"
-
 const double eps = 1e-9;
 
+void outerror(int typeError, const char* errStr)
+{
+    switch (typeError)
+    {
+    case MATRIX_ERROR_INPUT:
+        printf("Ошибка в функции заполнения матрицы!\n");
+        break;
+    case MARTIX_ERROR_PRINT:
+        printf("Ошибка в функции вывода матрицы!\nName Function:\noutput\n");
+        break;
+    case MATRIX_ERROR_MEM:
+        printf("Произошла ошибки при выделении памяти для матрицы!\nName Function:\ngetmemory\n");
+        break;
+    case MATRIX_ERROR_DELETE:
+        printf("Произошла ошибка при очистке данных матрицы!\nName Function:\nremovemem\n");
+        break;
+    case MATRIX_ERROR_SUM:
+        printf("Произошла ошибки при выполнении функции суммирования матриц!\nName Function:\nsummamatrix\n");
+        break;
+    case MATRIX_ERROR_INV:
+        printf("Произошла ошибка при выполнении функции обратной матрицы!\nName Function:\ninversion\n");
+        break;
+    case  MATRIX_ERROR_SUB:
+        printf("Произошла ошибка при выполнении функции разности!\nName Function:\nsubtraction\n");
+        break;
+    case  MATRIX_ERROR_MUL:
+        printf("Произошла ошибка при выполнении функции умножения матриц!\nName Function:\nmultiplication\n");
+        break;
+    case MATRIX_ERROR_GAUS:
+        printf("Произошла ошибка при выполнении функции нахождения матрицы методом гаусса!\nName Function:\ngauss\n");
+        break;
+
+    }
+    printf("Type error: %s", errStr);
+}
+void saveFile(Matrix* a)
+{
+    FILE* file = fopen("matrix.txt", "w");
+    if (!file)
+    {
+        fprintf(stderr, "Ошибка! Не удалось открыть файл!\n");
+        return;
+    }
+    int i = 0, j = 0;
+    fprintf(file, "%d %d\n", a->line, a->column);
+    for (i=0; i < a->line; i++)
+    {
+        for (j=0; j < a->column; j++)
+        {
+            fprintf(file,"%lg ", a->arr[i][j]);
+        }
+        fprintf(file, "\n");
+    }
+    printf("Матрицы была успешно сохранена!\n");
+    fclose(file);
+}
 void removemem(Matrix* a)
 {
     int i = 0, j = 0;
-    if (a->line <= a->column)
-    {
-        for (i = 0; i < a->column; i++)
-            free(a->arr[i]);
-    }
-    else
-    {
-        for (i = 0; i < a->line; i++)
-            free(a->arr[i]);
-    }
+    if (a->line == 0 || a->column == 0)
+        outerror(MATRIX_ERROR_DELETE, "Очистка памяти невозможна, посколькуо матрица не создана!\n");
+    for (i = 0; i < a->line; i++)
+        free(a->arr[i]);
+      free(a->arr);
 }
 void input(Matrix* type)
 {
+    if (type->line <= 0 || type->column <= 0)
+    {
+        outerror(MATRIX_ERROR_INPUT, "Инициализация матрицы невозможна!\n");
+        return;
+    }
     int i = 0, j = 0;
     for (i = 0; i < type->line; i++)
     {
@@ -25,26 +80,32 @@ void input(Matrix* type)
             scanf("%lf", &type->arr[i][j]);
     }
 }
-
 void getmemory(Matrix* matrix, int N, int M)
 {
+    if (N <= 0 || M <= 0)
+    {
+        outerror(MATRIX_ERROR_MEM, "При выделении памяти произошла ошибка!\nРазмерность матрицы меньше или равна нулю!\n");
+        return;
+    }
     int i = 0, j = 0;
     matrix->line = N;
     matrix->column = M;
-    matrix->arr = (double**)malloc(N * sizeof(double*));
+    matrix->arr = ((double**)calloc(N, sizeof(double*)));
     for (i = 0; i < N; i++)
     {
         for (j = 0; j < M; j++)
         {
-            matrix->arr[i] = (double*)malloc(M * sizeof(double));
-            matrix->arr[i][j] = 0;
-
+            matrix->arr[i] = (double*)calloc(M, sizeof(double));
         }
     }
 }
 
 void output(Matrix* x)
 {
+    if (x->line <= 0 || x->column <= 0) {
+        outerror(MARTIX_ERROR_PRINT, "Произошла ошибка при выводе матрицы на экран!\nЭлементы матрицы меньше или равны нулю!\n");
+        return;
+    }
     int i = 0, j = 0;
     for (i = 0; i < x->line; i++)
     {
@@ -56,13 +117,6 @@ void output(Matrix* x)
         printf("  |\n");
     }
     printf("\n\n");
-}
-Matrix error(Matrix* a)
-{
-    a->arr = 0;
-    a->line = 0;
-    a->column = 0;
-    return *a;
 }
 
 Matrix summatrix(Matrix* x, Matrix* y)
@@ -82,11 +136,11 @@ Matrix summatrix(Matrix* x, Matrix* y)
         return temp;
     }
     else
-        return temp = error(&temp);
-}
-int subsum(Matrix* x, Matrix* y)
-{
-    return (x->line == y->line && x->column == y->column);
+    {
+        outerror(MATRIX_ERROR_SUM, "Размерность матриц разная!\n");
+        return;
+    }
+        
 }
 
 Matrix multiplication(Matrix* x, Matrix* y)
@@ -109,9 +163,11 @@ Matrix multiplication(Matrix* x, Matrix* y)
         return c;
     }
     else
-        return c = error(&c);
+    {
+        outerror(MATRIX_ERROR_MUL, "Ошибка!\nМатрица(ы) не удовлетворяет(ют) правилу умножения!\n");
+        return;
+    }
 }
-
 Matrix subtraction(Matrix* x, Matrix* y)
 {
     int i = 0, j = 0;
@@ -129,47 +185,33 @@ Matrix subtraction(Matrix* x, Matrix* y)
         return temp;
     }
     else
-        return temp = error(&temp);
+    {
+        outerror(MATRIX_ERROR_SUB, "Количество строк и столбцов матриц не равны!\n");
+        return;
+    } 
 }
-
-
+void equating(Matrix* a, Matrix* b)
+{
+    int i, j;
+    for (i = 0; i < b->line; i++)
+        for (j = 0; j < b->column; j++)
+            a->arr[i][j] = b->arr[i][j];
+}
 int det(Matrix* matrix)
 {
     if (matrix->line == matrix->column)
     {
-
-        int i = 0, j = 0, k = 0;
-        double temp = 0;
-        double determinant = 1,countSwaps=1;
-        Matrix c = *matrix;
-        for (i = 0; i < matrix->line; ++i)
+        int i, j;
+        Matrix temp;
+        getmemory(&temp, matrix->line, matrix->column);
+        equating(&temp, matrix);
+        double determinant = 1;
+        gauss(&temp);
+        for (int i = 0; i < matrix->line; i++)
         {
-            int iMax = i;
-            for (j = i + 1; j < matrix->line; ++j)
-                if (fabs(c.arr[j][i]) > fabs(c.arr[iMax][i]))
-                    iMax = j;
-            if (fabs(c.arr[iMax][i]) < eps)
-                continue;
-            for (k = 0; k < matrix->column; ++k)
-            {
-                temp = c.arr[i][k];
-                c.arr[i][k] = c.arr[iMax][k];
-                c.arr[iMax][k] = temp;
-            }
-            countSwaps = -countSwaps * (i != iMax ? 1 : -1);
-
-            for (j = i + 1; j < matrix->line; ++j)
-            {
-                double q = -c.arr[j][i] / c.arr[i][i];
-                for (k = matrix->column - 1; k >= i; --k)
-                    c.arr[j][k] += q * c.arr[i][k];
-            }
+            determinant *= temp.arr[i][i];
         }
-        for (i = 0; i < matrix->line; i++)
-        {
-            determinant *= c.arr[i][i];
-        }
-        return determinant * countSwaps;
+        return determinant * temp.countSwaps;
     }
     else
         return -1;
@@ -181,9 +223,9 @@ void inversion(Matrix* a)
     if (a->line == a->column)
     {
         double temp;
-        double** E = (double**)malloc(a->line * sizeof(double*)); 
+        double** E = (double**)calloc(a->line , sizeof(double*)); 
         for (i = 0; i < a->line; i++)
-            E[i] = (double*)malloc(a->line * sizeof(double));
+            E[i] = (double*)calloc(a->column , sizeof(double));
 
         for (i = 0; i < a->line; i++)
             for (j = 0; j < a->line; j++)
@@ -240,13 +282,22 @@ void inversion(Matrix* a)
         free(E);
     }
     else
-        printf("The dimension of the matrix does not match!");
+    {
+        outerror(MATRIX_ERROR_INV, "Количество строк и столбцов матрицы не равны!\n");
+        return;
+    }
+       
 }
 
 Matrix transp(Matrix* a)
 {
-    int i = 0, j = 0;
+    if (a->line <= 0 || a->line == 1 || a->column == 0 || a->column == 1)
+    {
+        outerror(MATRIX_ERROR_TRANSP, "Ошибка при транспонировании матрицы!\n");
+        return;
+    }
     Matrix temp;
+    int i = 0, j = 0;
     getmemory(&temp, a->column, a->line);
     for (i = 0; i < a->line; i++)
     {
@@ -266,15 +317,14 @@ Matrix mulnum(Matrix* a, double k)
             temp.arr[i][j] = a->arr[i][j] * k;
     return temp;
 }
-
-int multi(Matrix* a, Matrix* b)
-{
-    return (a->line == b->column && a->column == b->line ||
-        a->line == b->line && a->column == b->column);
-}
 Matrix gauss(Matrix* a)
 {
     int i = 0, j = 0, k;
+    if (a->line != a->column)
+    {
+        outerror(MATRIX_ERROR_GAUS, "Матрица не является квадратной!\n");
+        return;
+    }
     double temp = 0;
     double countSwaps = 1;
     Matrix c = *a;
@@ -293,9 +343,7 @@ Matrix gauss(Matrix* a)
             c.arr[i][k] = c.arr[iMax][k];
             c.arr[iMax][k] = temp;
         }
-        countSwaps = -1 * countSwaps * (i != iMax ? 1 : -1); 
-
-        
+        a->countSwaps = -1 * countSwaps * (i != iMax ? 1 : -1); 
         for (j = i + 1; j < a->line; ++j)
         {
             double q = -c.arr[j][i] / c.arr[i][i];
@@ -304,4 +352,13 @@ Matrix gauss(Matrix* a)
         }
     }
     return c;
+}
+int multi(Matrix* a, Matrix* b)
+{
+    return (a->line == b->column && a->column == b->line ||
+        a->line == b->line && a->column == b->column);
+}
+int subsum(Matrix* x, Matrix* y)
+{
+    return (x->line == y->line && x->column == y->column);
 }

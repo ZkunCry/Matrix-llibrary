@@ -1,16 +1,30 @@
-#pragma once
-#define _CRT_SECURE_NO_WARNINGS 
+#pragma once //Директика нужна для того, чтобы не было ошибки при вставке кода в область программы
+#define _CRT_SECURE_NO_WARNINGS  //Директивы для корректной работы программы
 
 #include <stdio.h>
 #include <math.h>
 #include <malloc.h>
-#include <locale.h>
+
+enum MatrixError
+{
+    MATRIX_ERROR_INPUT, 
+    MARTIX_ERROR_PRINT,
+    MATRIX_ERROR_MEM,
+    MATRIX_ERROR_DELETE,
+    MATRIX_ERROR_SUM,
+    MATRIX_ERROR_SUB,
+    MATRIX_ERROR_TRANSP,
+    MATRIX_ERROR_MUL,
+    MATRIX_ERROR_GAUS,
+    MATRIX_ERROR_INV
+};
 
 typedef struct Matrix
 {
-    int column, line, size;
+    int column, line,countSwaps;
     double** arr;
 }Matrix;
+
 //@return sum matrix N x M
 Matrix summatrix(Matrix* x, Matrix* y);
 //@return sub matrix N x M
@@ -24,21 +38,25 @@ Matrix transp(Matrix* a);
 Matrix mulnum(Matrix* a, double k);
 //@return triangle matrix
 Matrix gauss(Matrix* a);
-//input matrix
+//@return input matrix
 void input(Matrix* x);
-//gives memory to a dynamic two-dimensional array
+//@return gives memory to a dynamic two-dimensional array
 void getmemory(Matrix* x, int N, int M);
-//prints a matrix on the display
+//@return prints a matrix on the display
 void output(Matrix* x);
-//removes allocated memory
+//@removes allocated memory
 void removemem(Matrix* a);
-//finds the inverse matrix
+//@finds the inverse matrix
 void inversion(Matrix* a);
-//checks the condition for finding the sum and difference of matrices
+//@checks the condition for finding the sum and difference of matrices
 int subsum(Matrix* x, Matrix* y);
-//checks the condition for finding the multiplication
+//@return checks the condition for finding the multiplication
 int multi(Matrix* a, Matrix* b);
-//find determinant
+//@return determinant
 int det(Matrix* matrix);
-//displays a matrix filled with zeros if the matrix does not satisfy the condition.
-Matrix error(Matrix* a);
+//@Matrix division.
+void equating(Matrix* a, Matrix* b);
+//@Save your matrix to file.
+void saveFile(Matrix* a);
+//@displays the type of error when a function is running
+void outerror(int typeError, const char* errStr);

@@ -1,22 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 #include "..\StaticLib\matrix.h"
-
 
 int main()
 {
+	system("chcp 1251 >null");
 	Matrix x, y,temp;
-	int n=2, m=2,n2=2,m2=2;
-	scanf("%d %d %d %d", &n, &m, &n2, &m2);
+	int n, m,n2,m2;
+	scanf("%d %d", &n, &m);
 	getmemory(&x, n, m);
-	getmemory(&y, n2, m2);
 	input(&x);
-	input(&y);
-	temp = summatrix(&x, &y);
-	output(&temp);
-	output(&x);
-	removemem(&temp);
 	removemem(&x);
-	removemem(&y);
 	return 0;
 }
