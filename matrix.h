@@ -60,3 +60,4 @@ void equating(Matrix* a, Matrix* b);
 void saveFile(Matrix* a);
 //@displays the type of error when a function is running
 void outerror(int typeError, const char* errStr);
+//

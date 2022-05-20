@@ -5,6 +5,7 @@
 
 int main()
 {
+	//
 	system("chcp 1251 >null");
 	Matrix x, y,temp;
 	int n, m,n2,m2;

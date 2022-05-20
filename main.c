@@ -362,3 +362,4 @@ int subsum(Matrix* x, Matrix* y)
 {
     return (x->line == y->line && x->column == y->column);
 }
+//
