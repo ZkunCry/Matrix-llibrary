@@ -1,7 +1,8 @@
-#pragma once //Директика нужна для того, чтобы не было ошибки при вставке кода в область программы
+#pragma once 
 #define _CRT_SECURE_NO_WARNINGS  //Директивы для корректной работы программы
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <malloc.h>
 
@@ -16,12 +17,14 @@ enum MatrixError
     MATRIX_ERROR_TRANSP,
     MATRIX_ERROR_MUL,
     MATRIX_ERROR_GAUS,
-    MATRIX_ERROR_INV
+    MATRIX_ERROR_INV,
+    MATRIX_ERROR_MULN
 };
 
 typedef struct Matrix
 {
-    int column, line,countSwaps;
+    int m, n;
+    double countSwaps;
     double** arr;
 }Matrix;
 
@@ -53,11 +56,12 @@ int subsum(Matrix* x, Matrix* y);
 //@return checks the condition for finding the multiplication
 int multi(Matrix* a, Matrix* b);
 //@return determinant
-int det(Matrix* matrix);
+double det(Matrix* matrix);
 //@Matrix division.
 void equating(Matrix* a, Matrix* b);
 //@Save your matrix to file.
-void saveFile(Matrix* a);
+void saveFile(Matrix* a,char *filename);
 //@displays the type of error when a function is running
 void outerror(int typeError, const char* errStr);
+void loadFile(Matrix* a,char *filename);
 //
