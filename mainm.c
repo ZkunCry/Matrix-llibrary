@@ -11,7 +11,6 @@ int main()
 	scanf("%d %d", &n, &m);
 	getmemory(&x, n, m);
 	input(&x);
-	inversion(&x);
-	output(&x);
+	saveFile(&x,"matrix2.txt");
 	return 0;
 }

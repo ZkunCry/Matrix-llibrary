@@ -28,6 +28,7 @@ typedef struct Matrix
     double** arr;
 }Matrix;
 
+Matrix division(Matrix* a, Matrix* b);
 //@return sum matrix N x M
 Matrix summatrix(Matrix* x, Matrix* y);
 //@return sub matrix N x M

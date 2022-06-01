@@ -40,7 +40,7 @@ void outerror(int typeError, const char* errStr)
 }
 void saveFile(Matrix* a,char *filename)
 {
-    FILE* file = fopen(filename, "w");
+    FILE* file = fopen(filename, "wt");
     if (!file || !a)
     {
         fprintf(stderr, "Ошибка! Не удалось открыть файл!\n");
@@ -394,5 +394,13 @@ int multi(Matrix* a, Matrix* b)
 int subsum(Matrix* x, Matrix* y)
 {
     return (x->n == y->n && x->m == y->m);
+}
+Matrix division(Matrix* a, Matrix* b)
+{
+    Matrix c;
+    getmemory(&c,a->n,a->m);
+    inversion(b);
+    c = multiplication(a, b);
+    return c;
 }
 //
