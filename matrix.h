@@ -1,4 +1,6 @@
 #pragma once 
+#pragma execution_character_set("utf-8")
+
 #define _CRT_SECURE_NO_WARNINGS  //Директивы для корректной работы программы
 ///
 #include <stdio.h>

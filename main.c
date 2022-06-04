@@ -37,7 +37,7 @@ void outerror(int typeError, const char* errStr)
         break;
     }
     printf("Type error: %s\n\n", errStr);
-}//
+}///
 void saveFile(Matrix* a,char *filename)
 {
     FILE* file = fopen(filename, "wt");
