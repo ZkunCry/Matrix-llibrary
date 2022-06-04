@@ -6,34 +6,34 @@ void outerror(int typeError, const char* errStr)
     switch (typeError)
     {
     case MATRIX_ERROR_INPUT:
-        printf("Ошибка в функции заполнения матрицы!\nName Function:\ninput\n");
+        printf("РћС€РёР±РєР° РІ С„СѓРЅРєС†РёРё Р·Р°РїРѕР»РЅРµРЅРёСЏ РјР°С‚СЂРёС†С‹!\nName Function:\ninput\n");
         break;
     case MARTIX_ERROR_PRINT:
-        printf("Ошибка в функции вывода матрицы!\nName Function:\noutput\n");
+        printf("РћС€РёР±РєР° РІ С„СѓРЅРєС†РёРё РІС‹РІРѕРґР° РјР°С‚СЂРёС†С‹!\nName Function:\noutput\n");
         break;
     case MATRIX_ERROR_MEM:
-        printf("Произошла ошибки при выделении памяти для матрицы!\nName Function:\ngetmemory\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєРё РїСЂРё РІС‹РґРµР»РµРЅРёРё РїР°РјСЏС‚Рё РґР»СЏ РјР°С‚СЂРёС†С‹!\nName Function:\ngetmemory\n");
         break;
     case MATRIX_ERROR_DELETE:
-        printf("Произошла ошибка при очистке данных матрицы!\nName Function:\nremovemem\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РѕС‡РёСЃС‚РєРµ РґР°РЅРЅС‹С… РјР°С‚СЂРёС†С‹!\nName Function:\nremovemem\n");
         break;
     case MATRIX_ERROR_SUM:
-        printf("Произошла ошибки при выполнении функции суммирования матриц!\nName Function:\nsummamatrix\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєРё РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё С„СѓРЅРєС†РёРё СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ РјР°С‚СЂРёС†!\nName Function:\nsummamatrix\n");
         break;
     case MATRIX_ERROR_INV:
-        printf("Произошла ошибка при выполнении функции обратной матрицы!\nName Function:\ninversion\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё С„СѓРЅРєС†РёРё РѕР±СЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹!\nName Function:\ninversion\n");
         break;
     case  MATRIX_ERROR_SUB:
-        printf("Произошла ошибка при выполнении функции разности!\nName Function:\nsubtraction\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё С„СѓРЅРєС†РёРё СЂР°Р·РЅРѕСЃС‚Рё!\nName Function:\nsubtraction\n");
         break;
     case  MATRIX_ERROR_MUL:
-        printf("Произошла ошибка при выполнении функции умножения матриц!\nName Function:\nmultiplication\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё С„СѓРЅРєС†РёРё СѓРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†!\nName Function:\nmultiplication\n");
         break;
     case MATRIX_ERROR_GAUS:
-        printf("Произошла ошибка при выполнении функции нахождения матрицы методом гаусса!\nName Function:\ngauss\n");
+        printf("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё С„СѓРЅРєС†РёРё РЅР°С…РѕР¶РґРµРЅРёСЏ РјР°С‚СЂРёС†С‹ РјРµС‚РѕРґРѕРј РіР°СѓСЃСЃР°!\nName Function:\ngauss\n");
         break;
     case MATRIX_ERROR_MULN:
-        printf("Проиозшла ошибка при выполнении функции умножения матрицы на число!\nName Function:\nmulnum\n");
+        printf("РџСЂРѕРёРѕР·С€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РїРѕР»РЅРµРЅРёРё С„СѓРЅРєС†РёРё СѓРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РЅР° С‡РёСЃР»Рѕ!\nName Function:\nmulnum\n");
         break;
     }
     printf("Type error: %s\n\n", errStr);
@@ -43,7 +43,7 @@ void saveFile(Matrix* a,char *filename)
     FILE* file = fopen(filename, "wt");
     if (!file || !a)
     {
-        fprintf(stderr, "Ошибка! Не удалось открыть файл!\n");
+        fprintf(stderr, "РћС€РёР±РєР°! РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»!\n");
         return;
     }
     int i = 0, j = 0;
@@ -56,7 +56,7 @@ void saveFile(Matrix* a,char *filename)
         }
         fprintf(file, "\n");
     }
-    printf("Матрицы была успешно сохранена!\n");
+    printf("РњР°С‚СЂРёС†С‹ Р±С‹Р»Р° СѓСЃРїРµС€РЅРѕ СЃРѕС…СЂР°РЅРµРЅР°!\n");
     fclose(file);
 }
 void loadFile(Matrix* a,char *filename)
@@ -64,7 +64,7 @@ void loadFile(Matrix* a,char *filename)
     FILE* file = fopen(filename, "rt");
     if (!file|| !a)
     {
-        fprintf(stderr, "Ошибка! Не удалось загрузить данные из файла!\n");
+        fprintf(stderr, "РћС€РёР±РєР°! РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р°!\n");
         return;
     }
     int i = 0, j = 0,n;
@@ -85,7 +85,7 @@ void removemem(Matrix* a)
     int i = 0, j = 0;
     if (a->n < 1 || a->m < 1)
     {
-        outerror(MATRIX_ERROR_DELETE,"Очистка памяти невозможна, посколькуо матрица не создана!");
+        outerror(MATRIX_ERROR_DELETE,"РћС‡РёСЃС‚РєР° РїР°РјСЏС‚Рё РЅРµРІРѕР·РјРѕР¶РЅР°, РїРѕСЃРєРѕР»СЊРєСѓРѕ РјР°С‚СЂРёС†Р° РЅРµ СЃРѕР·РґР°РЅР°!");
         return;
     }
     for (i = 0; i < a->n; i++)
@@ -96,7 +96,7 @@ void input(Matrix* type)
 {
     if (type->n < 2 || type->m < 2)
     {
-        outerror(MATRIX_ERROR_INPUT,"Размерность матрицы меньше двух");
+        outerror(MATRIX_ERROR_INPUT,"Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹ РјРµРЅСЊС€Рµ РґРІСѓС…");
         return;
     }
     int i = 0, j = 0;
@@ -110,7 +110,7 @@ void getmemory(Matrix* matrix, int N, int M)
 {
     if (N <= 0 || M <= 0)
     {
-        outerror(MATRIX_ERROR_MEM, "При выделении памяти произошла ошибка! Размерность матрицы меньше или равна нулю!");
+        outerror(MATRIX_ERROR_MEM, "РџСЂРё РІС‹РґРµР»РµРЅРёРё РїР°РјСЏС‚Рё РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°! Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹ РјРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅР° РЅСѓР»СЋ!");
         return;
     }
     int i = 0, j = 0;
@@ -129,7 +129,7 @@ void getmemory(Matrix* matrix, int N, int M)
 void output(Matrix* x)
 {
     if (x->n <= 0 || x->m <= 0) {
-        outerror(MARTIX_ERROR_PRINT, "Произошла ошибка при выводе матрицы на экран!Элементы матрицы меньше или равны нулю!");
+        outerror(MARTIX_ERROR_PRINT, "РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹РІРѕРґРµ РјР°С‚СЂРёС†С‹ РЅР° СЌРєСЂР°РЅ!Р­Р»РµРјРµРЅС‚С‹ РјР°С‚СЂРёС†С‹ РјРµРЅСЊС€Рµ РёР»Рё СЂР°РІРЅС‹ РЅСѓР»СЋ!");
         return;
     }
     int i = 0, j = 0;
@@ -163,7 +163,7 @@ Matrix summatrix(Matrix* x, Matrix* y)
     }
     else
     {
-        outerror(MATRIX_ERROR_SUM, "Размерность матриц разная!");
+        outerror(MATRIX_ERROR_SUM, "Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС† СЂР°Р·РЅР°СЏ!");
         return;
     }
         
@@ -190,7 +190,7 @@ Matrix multiplication(Matrix* x, Matrix* y)
     }
     else
     {
-        outerror(MATRIX_ERROR_MUL, "Ошибка!Матрица(ы) не удовлетворяет(ют) правилу умножения!");
+        outerror(MATRIX_ERROR_MUL, "РћС€РёР±РєР°!РњР°С‚СЂРёС†Р°(С‹) РЅРµ СѓРґРѕРІР»РµС‚РІРѕСЂСЏРµС‚(СЋС‚) РїСЂР°РІРёР»Сѓ СѓРјРЅРѕР¶РµРЅРёСЏ!");
         return;
     }
 }
@@ -212,7 +212,7 @@ Matrix subtraction(Matrix* x, Matrix* y)
     }
     else
     {
-        outerror(MATRIX_ERROR_SUB, "Количество строк и столбцов матриц не равны!");
+        outerror(MATRIX_ERROR_SUB, "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ РјР°С‚СЂРёС† РЅРµ СЂР°РІРЅС‹!");
         return;
     } 
 }
@@ -309,7 +309,7 @@ void inversion(Matrix* a)
     }
     else
     {
-        outerror(MATRIX_ERROR_INV, "Количество строк и столбцов матрицы не равны!");
+        outerror(MATRIX_ERROR_INV, "РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє Рё СЃС‚РѕР»Р±С†РѕРІ РјР°С‚СЂРёС†С‹ РЅРµ СЂР°РІРЅС‹!");
         return;
     }  
 }
@@ -318,7 +318,7 @@ Matrix transp(Matrix* a)
 {
     if (a->n <= 0 || a->n == 1 || a->m == 0 || a->m == 1)
     {
-        outerror(MATRIX_ERROR_TRANSP, "Ошибка при транспонировании матрицы!");
+        outerror(MATRIX_ERROR_TRANSP, "РћС€РёР±РєР° РїСЂРё С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРёРё РјР°С‚СЂРёС†С‹!");
         return;
     }
     Matrix temp;
@@ -343,7 +343,7 @@ void mulnum(Matrix* a, double k)
     }
     else
     {
-        outerror(MATRIX_ERROR_MULN,"Размерность матрицы меньше двух!");
+        outerror(MATRIX_ERROR_MULN,"Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹ РјРµРЅСЊС€Рµ РґРІСѓС…!");
         return;
     }
 }
@@ -352,7 +352,7 @@ Matrix gauss(Matrix* a)
     int i = 0, j = 0, k;
     if (a->n != a->m)
     {
-        outerror(MATRIX_ERROR_GAUS, "Матрица не является квадратной!");
+        outerror(MATRIX_ERROR_GAUS, "РњР°С‚СЂРёС†Р° РЅРµ СЏРІР»СЏРµС‚СЃСЏ РєРІР°РґСЂР°С‚РЅРѕР№!");
         return;
     }
     double temp = 0;
