@@ -37,7 +37,7 @@ void outerror(int typeError, const char* errStr)
         break;
     }
     printf("Type error: %s\n\n", errStr);
-}
+}//
 void saveFile(Matrix* a,char *filename)
 {
     FILE* file = fopen(filename, "wt");
@@ -332,17 +332,14 @@ Matrix transp(Matrix* a)
     return temp;
 }
 
-Matrix mulnum(Matrix* a, double k)
+void mulnum(Matrix* a, double k)
 {
     if (a->n > 1 && a->m > 1)
     {
         int i = 0, j = 0;
-        Matrix temp;
-        getmemory(&temp, a->n, a->m);
         for (i = 0; i < a->n; ++i)
             for (j = 0; j < a->m; ++j)
-                temp.arr[i][j] = a->arr[i][j] * k;
-        return temp;
+                a->arr[i][j] = a->arr[i][j] * k;
     }
     else
     {

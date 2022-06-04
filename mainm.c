@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "..\StaticLib\matrix.h"
-
+//
 int main()
 {
 	system("chcp 1251 >null");
@@ -11,6 +11,7 @@ int main()
 	scanf("%d %d", &n, &m);
 	getmemory(&x, n, m);
 	input(&x);
-	saveFile(&x,"matrix2.txt");
+	mulnum(&x,2);
+	output(&x);
 	return 0;
 }
