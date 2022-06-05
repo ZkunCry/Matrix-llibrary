@@ -103,12 +103,23 @@ void input(Matrix* type)
     for (i = 0; i < type->n; i++)
     {
         for (j = 0; j < type->m; j++)
-            scanf("%lf", &type->arr[i][j]);
+        {
+            while (1)
+            {
+                if ((scanf("%lf", &type->arr[i][j])) != 1)
+                {
+                    rewind(stdin);
+                    printf("Ошибка! Вы неверно ввели элемент матрицы!\n");
+                }
+                else
+                    break;
+            }
+        }
     }
 }
 void getmemory(Matrix* matrix, int N, int M)
 {
-    if (N <= 0 || M <= 0)
+    if (N <= 1 || M <= 1)
     {
         outerror(MATRIX_ERROR_MEM, "При выделении памяти произошла ошибка! Размерность матрицы меньше или равна нулю!");
         return;
@@ -314,7 +325,7 @@ void inversion(Matrix* a)
     }  
 }
 
-Matrix transp(Matrix* a)
+void transp(Matrix* a)
 {
     if (a->n <= 0 || a->n == 1 || a->m == 0 || a->m == 1)
     {
@@ -329,7 +340,12 @@ Matrix transp(Matrix* a)
         for (j = 0; j < a->m; j++)
             temp.arr[j][i] = a->arr[i][j];
     }
-    return temp;
+    getmemory(a, a->m, a->n);
+    for (i = 0; i < temp.n; i++)
+    {
+        for (j = 0; j < temp.m; j++)
+            a->arr[i][j] = temp.arr[i][j];
+    }
 }
 
 void mulnum(Matrix* a, double k)
@@ -358,6 +374,7 @@ Matrix gauss(Matrix* a)
     double temp = 0;
     double countSwaps = 1;
     Matrix c = *a;
+    a->countSwaps = countSwaps;
     for (i = 0; i < a->n; ++i)
     {
        
@@ -373,7 +390,7 @@ Matrix gauss(Matrix* a)
             c.arr[i][k] = c.arr[iMax][k];
             c.arr[iMax][k] = temp;
         }
-        a->countSwaps = -1 * countSwaps * (i != iMax ? 1 : -1); 
+        a->countSwaps = -1 * a->countSwaps * (i != iMax ? 1 : -1); 
         for (j = i + 1; j < a->n; ++j)
         {
             double q = -c.arr[j][i] / c.arr[i][i];
