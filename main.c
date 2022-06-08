@@ -52,11 +52,7 @@ void saveFile(Matrix* a,char *filename)
     {
         for (j=0; j < a->m; j++)
         {
-<<<<<<< HEAD
-            fprintf(file,"%.5lg ", a->arr[i][j]);
-=======
             fprintf(file,"%le ", a->arr[i][j]);
->>>>>>> 28337a314bf6312dc224290ed877ece416d0b6e2
         }
         fprintf(file, "\n");
     }
@@ -113,11 +109,7 @@ void input(Matrix* type)
                 if ((scanf("%le", &type->arr[i][j])) != 1)
                 {
                     rewind(stdin);
-<<<<<<< HEAD
-                    printf("������! �� ������� ����� ������� �������!\n");
-=======
                     printf("Ошибка! Вы неверно ввели элемент матрицы!\n");
->>>>>>> 28337a314bf6312dc224290ed877ece416d0b6e2
                 }
                 else
                     break;
@@ -127,11 +119,7 @@ void input(Matrix* type)
 }
 void getmemory(Matrix* matrix, int N, int M)
 {
-<<<<<<< HEAD
-    if (N <= 1 || M <= 1)
-=======
     if (N < 1 || M < 1)
->>>>>>> 28337a314bf6312dc224290ed877ece416d0b6e2
     {
         outerror(MATRIX_ERROR_MEM, "При выделении памяти произошла ошибка! Размерность матрицы меньше или равна нулю!");
         return;
@@ -161,11 +149,7 @@ void output(Matrix* x)
         printf("| ");
         for (j = 0; j < x->m; j++)
         {
-<<<<<<< HEAD
-            printf("%11.5le ", x->arr[i][j]);
-=======
             printf("%11.5lg ", x->arr[i][j]);
->>>>>>> 28337a314bf6312dc224290ed877ece416d0b6e2
         }
         printf("  |\n");
     }
