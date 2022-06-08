@@ -52,7 +52,7 @@ void saveFile(Matrix* a,char *filename)
     {
         for (j=0; j < a->m; j++)
         {
-            fprintf(file,"%.5lg ", a->arr[i][j]);
+            fprintf(file,"%le ", a->arr[i][j]);
         }
         fprintf(file, "\n");
     }
@@ -94,7 +94,7 @@ void removemem(Matrix* a)
 }
 void input(Matrix* type)
 {
-    if (type->n < 2 || type->m < 2)
+    if (type->n < 1 || type->m < 1)
     {
         outerror(MATRIX_ERROR_INPUT,"Размерность матрицы меньше двух");
         return;
@@ -119,7 +119,7 @@ void input(Matrix* type)
 }
 void getmemory(Matrix* matrix, int N, int M)
 {
-    if (N <= 1 || M <= 1)
+    if (N < 1 || M < 1)
     {
         outerror(MATRIX_ERROR_MEM, "При выделении памяти произошла ошибка! Размерность матрицы меньше или равна нулю!");
         return;
@@ -149,7 +149,7 @@ void output(Matrix* x)
         printf("| ");
         for (j = 0; j < x->m; j++)
         {
-            printf("%11.5le ", x->arr[i][j]);
+            printf("%11.5lg ", x->arr[i][j]);
         }
         printf("  |\n");
     }
@@ -327,7 +327,7 @@ void inversion(Matrix* a)
 
 void transp(Matrix* a)
 {
-    if (a->n <= 0 || a->n == 1 || a->m == 0 || a->m == 1)
+    if (a->n <= 0  || a->m == 0 )
     {
         outerror(MATRIX_ERROR_TRANSP, "Ошибка при транспонировании матрицы!");
         return;
@@ -350,7 +350,7 @@ void transp(Matrix* a)
 
 void mulnum(Matrix* a, double k)
 {
-    if (a->n > 1 && a->m > 1)
+    if (a->n > 0 && a->m > 0)
     {
         int i = 0, j = 0;
         for (i = 0; i < a->n; ++i)
@@ -359,7 +359,7 @@ void mulnum(Matrix* a, double k)
     }
     else
     {
-        outerror(MATRIX_ERROR_MULN,"Размерность матрицы меньше двух!");
+        outerror(MATRIX_ERROR_MULN,"Размерность матрицы меньше одного!");
         return;
     }
 }
