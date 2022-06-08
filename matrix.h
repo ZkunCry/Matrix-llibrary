@@ -2,6 +2,8 @@
 #pragma execution_character_set("utf-8")
 
 #define _CRT_SECURE_NO_WARNINGS  //Директивы для корректной работы программы
+//Примечание: Работает только на Windows!
+//Стандарт языка: C99.
 ///
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,7 +36,7 @@ Matrix division(Matrix* a, Matrix* b);
 Matrix summatrix(Matrix* x, Matrix* y);
 Matrix subtraction(Matrix* x, Matrix* y);
 Matrix multiplication(Matrix* x, Matrix* y);             
-Matrix transp(Matrix* a);
+void transp(Matrix* a);
 void mulnum(Matrix* a, double k);
 Matrix gauss(Matrix* a);
 void input(Matrix* x);

@@ -8,10 +8,12 @@ int main()
 	system("chcp 1251 >null");
 	Matrix x, y,temp;
 	int n, m,n2,m2;
-	scanf("%d %d", &n, &m);
-	getmemory(&x, n, m);
+	char* namefile = "matrix.txt";
+	getmemory(&x, 2, 2);
+	getmemory(&y, 2, 2);
 	input(&x);
-	mulnum(&x,2);
-	output(&x);
+	input(&y);
+	temp = summatrix(&x, &y);
+	output(&temp);
 	return 0;
 }
