@@ -52,7 +52,7 @@ void saveFile(Matrix* a,char *filename)
     {
         for (j=0; j < a->m; j++)
         {
-            fprintf(file,"%lg ", a->arr[i][j]);
+            fprintf(file,"%.5lg ", a->arr[i][j]);
         }
         fprintf(file, "\n");
     }
@@ -74,7 +74,7 @@ void loadFile(Matrix* a,char *filename)
             for (i = 0; i < a->n; i++)
             {
                 for (j = 0; j < a->m; j++)
-                    if (fscanf(file, "%lg ", &a->arr[i][j]) == 1)
+                    if (fscanf(file, "%le ", &a->arr[i][j]) == 1)
                         continue;
             }
     }
@@ -106,7 +106,7 @@ void input(Matrix* type)
         {
             while (1)
             {
-                if ((scanf("%lf", &type->arr[i][j])) != 1)
+                if ((scanf("%le", &type->arr[i][j])) != 1)
                 {
                     rewind(stdin);
                     printf("Ошибка! Вы неверно ввели элемент матрицы!\n");
@@ -149,7 +149,7 @@ void output(Matrix* x)
         printf("| ");
         for (j = 0; j < x->m; j++)
         {
-            printf("%11.5lf ", x->arr[i][j]);
+            printf("%11.5le ", x->arr[i][j]);
         }
         printf("  |\n");
     }
