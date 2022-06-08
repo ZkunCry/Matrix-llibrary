@@ -1,15 +1,9 @@
 #pragma once 
 #pragma execution_character_set("utf-8")
 
-<<<<<<< HEAD
-#define _CRT_SECURE_NO_WARNINGS  //Äèðåêòèâû äëÿ êîððåêòíîé ðàáîòû ïðîãðàììû
-//Ïðèìå÷àíèå: Ðàáîòàåò òîëüêî íà Windows!
-//Ñòàíäàðò ÿçûêà: C99.
-=======
 #define _CRT_SECURE_NO_WARNINGS  //Ð”Ð¸Ñ€ÐµÐºÑ‚Ð¸Ð²Ñ‹ Ð´Ð»Ñ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾Ð¹ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹
 //ÐŸÑ€Ð¸Ð¼ÐµÑ‡Ð°Ð½Ð¸Ðµ: Ð Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° Windows!
 //Ð¡Ñ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚ ÑÐ·Ñ‹ÐºÐ°: C99.
->>>>>>> 28337a314bf6312dc224290ed877ece416d0b6e2
 ///
 #include <stdio.h>
 #include <stdlib.h>
